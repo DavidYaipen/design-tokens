@@ -1,0 +1,1 @@
+export { ThemePlugin } from './ThemePlugin';

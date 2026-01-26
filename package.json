@@ -1,0 +1,115 @@
+{
+  "name": "@oyaipen/design-tokens",
+  "version": "1.0.0",
+  "description": "Design tokens and icon system for multi-framework applications",
+  "type": "module",
+  "main": "./dist/index.js",
+  "module": "./dist/index.mjs",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    },
+    "./react": {
+      "types": "./dist/react/index.d.ts",
+      "import": "./dist/react/index.mjs",
+      "require": "./dist/react/index.js"
+    },
+    "./vue": {
+      "types": "./dist/vue/index.d.ts",
+      "import": "./dist/vue/index.mjs",
+      "require": "./dist/vue/index.js"
+    },
+    "./css": "./dist/css/tokens.css",
+    "./css/themes": "./dist/css/themes.css",
+    "./css/light": "./dist/css/light.css",
+    "./css/dark": "./dist/css/dark.css",
+    "./tailwind": {
+      "types": "./dist/tailwind/index.d.ts",
+      "import": "./dist/tailwind/index.mjs",
+      "require": "./dist/tailwind/index.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "dev": "vite",
+    "prebuild": "npm run clean && npm run generate",
+    "build": "vite build && npm run copy:css",
+    "copy:css": "node -e \"const fs=require('fs');const path=require('path');fs.mkdirSync('dist/css',{recursive:true});['tokens.css','themes.css','light.css','dark.css'].forEach(f=>fs.copyFileSync(path.join('src/css',f),path.join('dist/css',f)))\"",
+    "clean": "rimraf dist",
+    "generate": "npm run generate:tokens && npm run generate:icons && npm run generate:css",
+    "generate:tokens": "tsx scripts/build-from-config.ts",
+    "generate:icons": "npm run generate:icons:react && npm run generate:icons:vue",
+    "generate:icons:react": "tsx scripts/generate-icons-react.ts",
+    "generate:icons:vue": "tsx scripts/generate-icons-vue.ts",
+    "generate:css": "tsx scripts/generate-css-vars.ts",
+    "add:color": "tsx scripts/add-color.ts",
+    "add:icon": "tsx scripts/add-icon.ts",
+    "typecheck": "tsc --noEmit",
+    "prepublishOnly": "npm run build"
+  },
+  "devDependencies": {
+    "@svgr/core": "^8.1.0",
+    "@svgr/plugin-jsx": "^8.1.0",
+    "@svgr/plugin-prettier": "^8.1.0",
+    "@types/node": "^20.11.0",
+    "@types/react": "^18.2.48",
+    "@types/react-dom": "^18.2.18",
+    "@vitejs/plugin-react": "^4.2.1",
+    "@vitejs/plugin-vue": "^5.0.3",
+    "glob": "^10.3.10",
+    "prettier": "^3.2.4",
+    "rimraf": "^5.0.5",
+    "svgo": "^3.2.0",
+    "tailwindcss": "^4.1.18",
+    "tsx": "^4.7.0",
+    "typescript": "^5.3.3",
+    "vite": "^5.0.11",
+    "vite-plugin-dts": "^3.7.0",
+    "vue": "^3.4.15"
+  },
+  "peerDependencies": {
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "tailwindcss": "^3.0.0",
+    "vue": "^3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": true
+    },
+    "react-dom": {
+      "optional": true
+    },
+    "vue": {
+      "optional": true
+    },
+    "tailwindcss": {
+      "optional": true
+    }
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "keywords": [
+    "design-tokens",
+    "design-system",
+    "tokens",
+    "theming",
+    "react",
+    "vue",
+    "icons",
+    "css-variables"
+  ],
+  "author": "",
+  "license": "MIT"
+}
