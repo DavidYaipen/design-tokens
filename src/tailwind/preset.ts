@@ -3,6 +3,8 @@ import { spacing } from '../tokens/core/spacing';
 import { shadows } from '../tokens/core/shadows';
 import { borderRadius, borderWidths } from '../tokens/core/borders';
 import { breakpoints } from '../tokens/core/breakpoints';
+import { durations, easings, keyframes, animationPresets } from '../tokens/core/animations';
+import { zIndex } from '../tokens/core/zindex';
 import { getAllTailwindColors } from './colors';
 import type { TailwindPreset, TailwindPresetOptions } from './types';
 
@@ -84,6 +86,79 @@ export function createTailwindPreset(options: TailwindPresetOptions = {}): Tailw
       lg: breakpoints.lg,
       xl: breakpoints.xl,
       '2xl': breakpoints['2xl'],
+    },
+    // Animation tokens
+    transitionDuration: {
+      instant: durations.instant,
+      fast: durations.fast,
+      DEFAULT: durations.normal,
+      slow: durations.slow,
+      slower: durations.slower,
+      slowest: durations.slowest,
+    },
+    transitionTimingFunction: {
+      linear: easings.linear,
+      ease: easings.ease,
+      'ease-in': easings.easeIn,
+      'ease-out': easings.easeOut,
+      'ease-in-out': easings.easeInOut,
+      'ease-in-quad': easings.easeInQuad,
+      'ease-out-quad': easings.easeOutQuad,
+      'ease-in-out-quad': easings.easeInOutQuad,
+      'ease-in-cubic': easings.easeInCubic,
+      'ease-out-cubic': easings.easeOutCubic,
+      'ease-in-out-cubic': easings.easeInOutCubic,
+      'ease-in-back': easings.easeInBack,
+      'ease-out-back': easings.easeOutBack,
+      'ease-in-out-back': easings.easeInOutBack,
+      spring: easings.spring,
+    },
+    keyframes: {
+      fadeIn: keyframes.fadeIn,
+      fadeOut: keyframes.fadeOut,
+      slideInUp: keyframes.slideInUp,
+      slideInDown: keyframes.slideInDown,
+      slideInLeft: keyframes.slideInLeft,
+      slideInRight: keyframes.slideInRight,
+      scaleIn: keyframes.scaleIn,
+      scaleOut: keyframes.scaleOut,
+      spin: keyframes.spin,
+      ping: keyframes.ping,
+      pulse: keyframes.pulse,
+      bounce: keyframes.bounce,
+      shake: keyframes.shake,
+    },
+    animation: {
+      none: 'none',
+      fadeIn: animationPresets.fadeIn,
+      fadeOut: animationPresets.fadeOut,
+      slideInUp: animationPresets.slideInUp,
+      slideInDown: animationPresets.slideInDown,
+      slideInLeft: animationPresets.slideInLeft,
+      slideInRight: animationPresets.slideInRight,
+      scaleIn: animationPresets.scaleIn,
+      scaleOut: animationPresets.scaleOut,
+      spin: animationPresets.spin,
+      ping: animationPresets.ping,
+      pulse: animationPresets.pulse,
+      bounce: animationPresets.bounce,
+      shake: animationPresets.shake,
+    },
+    // Z-index scale
+    zIndex: {
+      auto: 'auto',
+      behind: String(zIndex.behind),
+      base: String(zIndex.base),
+      raised: String(zIndex.raised),
+      dropdown: String(zIndex.dropdown),
+      sticky: String(zIndex.sticky),
+      header: String(zIndex.header),
+      overlay: String(zIndex.overlay),
+      modal: String(zIndex.modal),
+      popover: String(zIndex.popover),
+      tooltip: String(zIndex.tooltip),
+      toast: String(zIndex.toast),
+      max: String(zIndex.max),
     },
   };
 

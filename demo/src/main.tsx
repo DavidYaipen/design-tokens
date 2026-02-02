@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import { ThemeProvider } from '@oyaipen/design-tokens/react';
-import '@oyaipen/design-tokens/css/themes';
+import { ThemeProvider } from '@smcore/corex-design/react';
+import '@smcore/corex-design/css/themes';
 import './index.css';
 import App from './App';
 

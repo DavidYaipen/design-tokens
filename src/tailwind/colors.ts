@@ -12,10 +12,13 @@ export function getTailwindColorPalette(): TailwindColorPalette {
   return {
     gray: colorPalettes.gray as unknown as TailwindColorScale,
     blue: colorPalettes.blue as unknown as TailwindColorScale,
-    sky: colorPalettes.sky as unknown as TailwindColorScale,
+    skyBlue: colorPalettes.skyBlue as unknown as TailwindColorScale,
     purple: colorPalettes.purple as unknown as TailwindColorScale,
     red: colorPalettes.red as unknown as TailwindColorScale,
     yellow: colorPalettes.yellow as unknown as TailwindColorScale,
+    green: colorPalettes.green as unknown as TailwindColorScale,
+    orange: colorPalettes.orange as unknown as TailwindColorScale,
+    cyan: colorPalettes.cyan as unknown as TailwindColorScale,
   };
 }
 

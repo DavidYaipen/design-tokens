@@ -171,7 +171,7 @@ export const colorPalette = {
     Object.entries(blue).map(([k, v]) => [\`brand\${k}\`, v])
   ),
   ...Object.fromEntries(
-    Object.entries(sky).map(([k, v]) => [\`success\${k}\`, v])
+    Object.entries(green).map(([k, v]) => [\`success\${k}\`, v])
   ),
   ...Object.fromEntries(
     Object.entries(red).map(([k, v]) => [\`error\${k}\`, v])
@@ -363,6 +363,121 @@ export const mediaQueries = {\n`;
   console.log('✓ Generated: src/tokens/core/breakpoints.ts');
 }
 
+// Generar archivo de animaciones
+async function generateAnimationsTS(config: DesignConfig): Promise<void> {
+  const { animations } = config;
+
+  let content = `/**
+ * Animation & Transition Tokens
+ * Auto-generated from design.config.ts
+ */
+
+/**
+ * Transition durations
+ */
+export const durations = {\n`;
+  for (const [name, value] of Object.entries(animations.durations)) {
+    content += `  ${name}: '${value}',\n`;
+  }
+  content += `} as const;
+
+/**
+ * Easing functions
+ */
+export const easings = {\n`;
+  for (const [name, value] of Object.entries(animations.easings)) {
+    content += `  ${name}: '${value}',\n`;
+  }
+  content += `} as const;
+
+/**
+ * Keyframe definitions
+ */
+export const keyframes = {\n`;
+  for (const [name, steps] of Object.entries(animations.keyframes)) {
+    content += `  ${name}: {\n`;
+    for (const [step, props] of Object.entries(steps)) {
+      content += `    '${step}': {\n`;
+      for (const [prop, val] of Object.entries(props as Record<string, string>)) {
+        content += `      ${prop}: '${val}',\n`;
+      }
+      content += `    },\n`;
+    }
+    content += `  },\n`;
+  }
+  content += `} as const;
+
+/**
+ * Animation presets (ready to use)
+ */
+export const animationPresets = {\n`;
+  for (const [name, value] of Object.entries(animations.presets)) {
+    content += `  ${name}: '${value}',\n`;
+  }
+  content += `} as const;
+
+export type Duration = keyof typeof durations;
+export type Easing = keyof typeof easings;
+export type KeyframeName = keyof typeof keyframes;
+export type AnimationPreset = keyof typeof animationPresets;
+
+/**
+ * Helper to create a transition string
+ */
+export function createTransition(
+  property: string | string[] = 'all',
+  duration: Duration = 'normal',
+  easing: Easing = 'ease'
+): string {
+  const props = Array.isArray(property) ? property : [property];
+  return props.map(p => \`\${p} \${durations[duration]} \${easings[easing]}\`).join(', ');
+}
+
+export const animations = {
+  durations,
+  easings,
+  keyframes,
+  presets: animationPresets,
+  createTransition,
+} as const;
+`;
+
+  const outputPath = path.resolve(__dirname, '../src/tokens/core/animations.ts');
+  await fs.writeFile(outputPath, content);
+  console.log('✓ Generated: src/tokens/core/animations.ts');
+}
+
+// Generar archivo de z-index
+async function generateZIndexTS(config: DesignConfig): Promise<void> {
+  const { zIndex } = config;
+
+  let content = `/**
+ * Z-Index Scale
+ * Auto-generated from design.config.ts
+ */
+
+export const zIndex = {\n`;
+  for (const [name, value] of Object.entries(zIndex)) {
+    content += `  ${name}: ${value},\n`;
+  }
+  content += `} as const;
+
+export type ZIndexKey = keyof typeof zIndex;
+export type ZIndexValue = (typeof zIndex)[ZIndexKey];
+
+/**
+ * Get z-index value by key
+ */
+export function getZIndex(key: ZIndexKey): number {
+  return zIndex[key];
+}
+`;
+
+  const outputPath = path.resolve(__dirname, '../src/tokens/core/zindex.ts');
+  await fs.writeFile(outputPath, content);
+  console.log('✓ Generated: src/tokens/core/zindex.ts');
+}
+
 // Función principal
 async function main() {
   console.log('Building tokens from design.config.ts...\n');
@@ -377,6 +492,8 @@ async function main() {
       generateBordersTS(config),
       generateShadowsTS(config),
       generateBreakpointsTS(config),
+      generateAnimationsTS(config),
+      generateZIndexTS(config),
     ]);
 
     console.log('\n✓ All tokens generated successfully!');

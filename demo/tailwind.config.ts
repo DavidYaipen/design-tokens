@@ -1,5 +1,5 @@
 import type { Config } from 'tailwindcss';
-import { tailwindPreset } from '@oyaipen/design-tokens/tailwind';
+import { tailwindPreset } from '@smcore/corex-design/tailwind';
 
 export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],

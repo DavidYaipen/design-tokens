@@ -101,6 +101,18 @@ export type ShadowsConfig = Record<string, string>;
 
 export type BreakpointsConfig = Record<string, string>;
 
+export type KeyframeStep = Record<string, string>;
+export type KeyframeDefinition = Record<string, KeyframeStep>;
+
+export interface AnimationsConfig {
+  durations: Record<string, string>;
+  easings: Record<string, string>;
+  keyframes: Record<string, KeyframeDefinition>;
+  presets: Record<string, string>;
+}
+
+export type ZIndexConfig = Record<string, number>;
+
 export interface DesignConfig {
   colors: ColorsConfig;
   icons: IconsConfig;
@@ -109,4 +121,6 @@ export interface DesignConfig {
   borders: BordersConfig;
   shadows: ShadowsConfig;
   breakpoints: BreakpointsConfig;
+  animations: AnimationsConfig;
+  zIndex: ZIndexConfig;
 }

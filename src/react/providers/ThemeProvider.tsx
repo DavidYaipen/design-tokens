@@ -1,3 +1,5 @@
+"use client";
+
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import { lightTheme, darkTheme, type Theme, type ThemeName } from '../../tokens/themes';
 
@@ -19,7 +21,7 @@ interface ThemeProviderProps {
 export const ThemeProvider: React.FC<ThemeProviderProps> = ({
   children,
   defaultTheme = 'light',
-  storageKey = 'design-tokens-theme',
+  storageKey = 'corex-design-theme',
 }) => {
   const [themeName, setThemeName] = useState<ThemeName>(() => {
     if (typeof window !== 'undefined') {

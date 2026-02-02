@@ -60,10 +60,13 @@ export interface TailwindColorScale {
 export interface TailwindColorPalette {
   gray: TailwindColorScale;
   blue: TailwindColorScale;
-  sky: TailwindColorScale;
+  skyBlue: TailwindColorScale;
   purple: TailwindColorScale;
   red: TailwindColorScale;
   yellow: TailwindColorScale;
+  green: TailwindColorScale;
+  orange: TailwindColorScale;
+  cyan: TailwindColorScale;
 }
 
 export interface TailwindSemanticColors {

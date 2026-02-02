@@ -47,6 +47,13 @@ export default defineConfig({
         },
         preserveModules: false,
         exports: 'named',
+        // Add "use client" banner to React bundle for Next.js App Router compatibility
+        banner: (chunk) => {
+          if (chunk.fileName.includes('react/index')) {
+            return '"use client";';
+          }
+          return '';
+        },
       },
     },
     sourcemap: true,
